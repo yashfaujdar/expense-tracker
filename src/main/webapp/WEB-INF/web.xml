@@ -1,0 +1,79 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>AccomPromoEditDB</servlet-name>
+    <servlet-class>com.travel.servlet.AccomPromoEditDB</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccomPromoEditDB</servlet-name>
+    <url-pattern>/AccomPromoEditDetails</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AccFiltServlet</servlet-name>
+    <servlet-class>com.travel.servlet.AccFiltServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccFiltServlet</servlet-name>
+    <url-pattern>/AccFilt</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AccomPromoViewDB</servlet-name>
+    <servlet-class>com.travel.servlet.AccomPromoViewDB</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AccomPromoViewDB</servlet-name>
+    <url-pattern>/AccomPromoViewDB</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddItemServlet</servlet-name>
+    <servlet-class>com.travel.servlet.AddItemServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemServlet</servlet-name>
+    <url-pattern>/AddItemServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>BudgEditDB</servlet-name>
+    <servlet-class>com.travel.servlet.BudgEditDB</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>BudgEditDB</servlet-name>
+    <url-pattern>/BudgEditDB</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+    <servlet-name>BudgExpViewDB</servlet-name>
+    <servlet-class>com.travel.servlet.BudgExpViewDB</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>BudgExpViewDB</servlet-name>
+    <url-pattern>/BudgExpViewDB</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>DelChecklistItemServlet</servlet-name>
+    <servlet-class>com.travel.servlet.DelChecklistItemServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DelChecklistItemServlet</servlet-name>
+    <url-pattern>/DelChecklistItem</url-pattern>
+</servlet-mapping>
+<servlet>
+    <servlet-name>DelItinServlet</servlet-name>
+    <servlet-class>com.travel.servlet.DelItinServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DelItinServlet</servlet-name>
+    <url-pattern>/DelItin</url-pattern>
+</servlet-mapping>
+
+</web-app>
