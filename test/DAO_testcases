@@ -1,0 +1,98 @@
+package com.travel.dao;
+
+import org.junit.jupiter.api.*;
+import org.mockito.*;
+
+import java.sql.*;
+
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class AccomPromoDaoTest {
+
+    @Mock
+    private Connection mockConnection;
+
+    @Mock
+    private PreparedStatement mockPreparedStatement;
+
+    @Mock
+    private Statement mockStatement;
+
+    @Mock
+    private ResultSet mockResultSet;
+
+    @InjectMocks
+    private AccomPromoDao accomPromoDao;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        MockitoAnnotations.openMocks(this);
+        when(DriverManager.getConnection(anyString(), anyString(), anyString())).thenReturn(mockConnection);
+        when(mockConnection.prepareStatement(anyString())).thenReturn(mockPreparedStatement);
+        when(mockConnection.createStatement()).thenReturn(mockStatement);
+    }
+
+    @Test
+    void testUpdatePromoPriority_Success() throws Exception {
+        when(mockPreparedStatement.executeUpdate()).thenReturn(1);
+
+        boolean result = accomPromoDao.updatePromoPriority("A101", 3);
+
+        assertTrue(result);
+        verify(mockPreparedStatement, times(1)).setInt(1, 3);
+        verify(mockPreparedStatement, times(1)).setString(2, "A101");
+        verify(mockPreparedStatement, times(1)).executeUpdate();
+    }
+
+    @Test
+    void testUpdatePromoPriority_Failure() throws Exception {
+        when(mockPreparedStatement.executeUpdate()).thenReturn(0);
+
+        boolean result = accomPromoDao.updatePromoPriority("A101", 5);
+
+        assertFalse(result);
+    }
+
+    @Test
+    void testUpdatePromoPriority_Exception() throws Exception {
+        when(mockPreparedStatement.executeUpdate()).thenThrow(new SQLException("SQL Error"));
+
+        boolean result = accomPromoDao.updatePromoPriority("A101", 2);
+
+        assertFalse(result);
+    }
+
+    @Test
+    void testGetAccommodationDetails_Success() throws Exception {
+        when(mockStatement.executeQuery(anyString())).thenReturn(mockResultSet);
+        when(mockResultSet.next()).thenReturn(true);
+        when(mockResultSet.getString("accom_id")).thenReturn("A101");
+
+        ResultSet resultSet = accomPromoDao.getAccommodationDetails("A101");
+
+        assertNotNull(resultSet);
+        assertTrue(resultSet.next());
+        assertEquals("A101", resultSet.getString("accom_id"));
+    }
+
+    @Test
+    void testGetAccommodationDetails_EmptyResult() throws Exception {
+        when(mockStatement.executeQuery(anyString())).thenReturn(mockResultSet);
+        when(mockResultSet.next()).thenReturn(false);
+
+        ResultSet resultSet = accomPromoDao.getAccommodationDetails("A999");
+
+        assertNotNull(resultSet);
+        assertFalse(resultSet.next());
+    }
+
+    @Test
+    void testGetAccommodationDetails_Exception() throws Exception {
+        when(mockStatement.executeQuery(anyString())).thenThrow(new SQLException("Query Error"));
+
+        ResultSet resultSet = accomPromoDao.getAccommodationDetails("A101");
+
+        assertNull(resultSet);
+    }
+}
